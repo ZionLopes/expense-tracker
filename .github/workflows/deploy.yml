@@ -35,17 +35,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm'
+          # The "cache: 'npm'" line has been removed to fix the error
       - name: Install dependencies
         run: npm install
-      
-      # --- THIS IS THE NEW STEP THAT FIXES THE PROBLEM ---
       - name: Add execute permission to scripts
         run: chmod -R +x node_modules/.bin/
-      # ----------------------------------------------------
-
       - name: Build
-        run: npm run build # This will now have permission to run
+        run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
