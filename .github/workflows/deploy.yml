@@ -38,8 +38,14 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm install
+      
+      # --- THIS IS THE NEW STEP THAT FIXES THE PROBLEM ---
+      - name: Add execute permission to scripts
+        run: chmod -R +x node_modules/.bin/
+      # ----------------------------------------------------
+
       - name: Build
-        run: npm run build # This command uses your vite.config.js with the correct 'base' path
+        run: npm run build # This will now have permission to run
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
